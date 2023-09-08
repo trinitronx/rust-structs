@@ -114,6 +114,18 @@
             "icon": {
                 "id": "beaker"
             }
+        },
+        {
+            "type": "cargo",
+            "command": "doc",
+            "problemMatcher": [
+                "$rustc"
+            ],
+            "group": "none",
+            "label": "rust: cargo doc",
+            "icon": {
+                "id": "book"
+            }
         }
     ]
 }
