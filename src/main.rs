@@ -1,12 +1,15 @@
 fn main() {
     // Defining and Instantiating Structs
     defining_and_instantiating_structs();
+    println!("\n");
 
     // Using the Field Init Shorthand
     using_field_init_shorthand();
+    println!("\n");
 
     // Creating Instances from Other Instances with Struct Update Syntax
     struct_update_syntax();
+    println!("\n");
 }
 
 // Example: Defining and Instantiating Structs
