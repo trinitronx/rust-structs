@@ -21,6 +21,7 @@ fn main() {
 }
 
 // Example: Defining and Instantiating Structs
+/// Example Struct for storing User data
 #[derive(Debug)]
 struct User {
     active: bool,
