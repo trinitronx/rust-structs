@@ -10,6 +10,10 @@ fn main() {
     // Creating Instances from Other Instances with Struct Update Syntax
     struct_update_syntax();
     println!("\n");
+
+    // Using Tuple Structs Without Named Fields to Create Different Types
+    tuple_structs();
+    println!("\n");
 }
 
 // Example: Defining and Instantiating Structs
@@ -94,8 +98,8 @@ fn struct_update_syntax() {
     let user3 = User {
         email: String::from("struct-update@example.com"),
         ..user1 // = just use all other values from user1
-        // FYI! b/c String does NOT implement Copy trait,
-        // String fields from user1 are __moved__ into user3's fields
+                // FYI! b/c String does NOT implement Copy trait,
+                // String fields from user1 are __moved__ into user3's fields
     };
     println!("`user3` is: {:#?}", user3);
 
@@ -103,3 +107,55 @@ fn struct_update_syntax() {
     // println!("`user1` is now unusable: {:#?}", user1); // Compile Error: borrow of partially moved value: `user1`
     // partial move occurs because `user1.username` has type `String`, which does not implement the `Copy` trait
 }
+
+// Example: Using Tuple Structs Without Named Fields to Create Different Types
+/// A Tuple Struct for representing an RGB color,
+/// composed of 3x i32 numbers
+#[derive(Debug, Copy, Clone)]
+struct Color(i32, i32, i32);
+/// A Tuple Struct for representing an R3 Point,
+/// composed of 3x i32 numbers for X, Y, and Z coords
+#[derive(Debug)]
+struct Point(i32, i32, i32);
+/// Rust also supports structs that look similar to tuples, called tuple structs.
+/// Tuple structs have the added meaning the struct name provides but don’t
+/// have names associated with their fields;
+/// rather, they just have the types of the fields.
+///
+/// When to use Tuple Structs
+/// Tuple structs are useful when you want to give the whole tuple a name and
+/// make the tuple a different type from other tuples, and when naming each
+/// field as in a regular struct would be verbose or redundant.
+fn tuple_structs() {
+    println!("tuple_structs()");
+    let black = Color(0, 0, 0);
+    let origin = Point(0, 0, 0);
+
+    println!("`black` is: {:?}", black);
+    println!("`origin` is: {:?}", origin);
+
+    let black2 = &mut Color(0, 0, 0);
+    let mut black_plus_one = &black2;
+    tuple_structs_are_unique_types(black2); // this works
+
+    println!("`black`+1 is: {:?}", black2);
+
+    // tuple_structs_are_unique_types(origin); // Compile Error: mismatched types
+    // expected `Color`, found `Point`
+}
+
+/// Each struct you define is its own type,
+/// even though the fields within the struct might have the same types.
+/// For example, a function that takes a parameter of type Color
+/// cannot take a Point as an argument,
+/// even though both types are made up of three i32 values.
+fn tuple_structs_are_unique_types(c: &mut Color) -> &mut Color {
+    // tuple struct instances are similar to tuples
+    // you can destructure them into their individual pieces,
+    // and you can use a . followed by the index to access an individual value.
+    c.0 += 1;
+    c.1 += 1;
+    c.2 += 1;
+    c
+}
+
