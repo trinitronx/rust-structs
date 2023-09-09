@@ -88,7 +88,15 @@ fn using_field_init_shorthand() {
     println!("`user2` is: {:#?}", user2);
 }
 
-// Example: Creating Instances from Other Instances with Struct Update Syntax
+/// Example: Creating Instances from Other Instances with Struct Update Syntax
+/// 
+/// It’s often useful to create a new instance of a struct that includes most
+/// of the values from another instance, but changes some.
+/// You can do this using struct update syntax.
+/// First, in this function we show how to create a new User instance in user2
+/// regularly, without the update syntax. We set a new value for email but
+/// otherwise use the same values from `user1` that we created in
+/// `using_field_init_shorthand()`.
 fn struct_update_syntax() {
     println!("struct_update_syntax():");
     let user1 = User {
