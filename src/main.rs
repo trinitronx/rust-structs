@@ -14,6 +14,10 @@ fn main() {
     // Using Tuple Structs Without Named Fields to Create Different Types
     tuple_structs();
     println!("\n");
+
+    // Unit-Like Structs Without Any Fields
+    unit_like_structs();
+    println!("\n");
 }
 
 // Example: Defining and Instantiating Structs
@@ -159,3 +163,20 @@ fn tuple_structs_are_unique_types(c: &mut Color) -> &mut Color {
     c
 }
 
+// Example: Unit-Like Structs Without Any Fields
+/// An example Unit-Like Struct called: "AlwaysEqual"
+#[derive(Debug)]
+struct AlwaysEqual;
+
+/// You can also define structs that don’t have any fields!
+/// These are called unit-like structs because they behave similarly to (),
+/// the unit type
+/// 
+/// When to Use Unit-Like Structs
+/// Unit-like structs can be useful when you need to implement a trait on some
+/// type but don’t have any data that you want to store in the type itself.
+fn unit_like_structs() {
+    println!("unit_like_structs()");
+    let subject = AlwaysEqual;
+    println!("`subject` is: {:#?}", subject);
+}
